@@ -84,7 +84,7 @@ class Component extends \yii\base\Component
      * ```
      *
      * @param array $filters
-     * @return array
+     * @return array of Invoice objects
      */
     public function getInvoices($filters = [])
     {
@@ -113,6 +113,20 @@ class Component extends \yii\base\Component
         });
     }
 
+    /**
+     * @param $id
+     * @return array Invoice object
+     */
+    public function getInvoice($id)
+    {
+        return $this->getApi()->get(self::ROUTE_INVOICES . '/' . $id);
+    }
+
+    /**
+     * @param int $page
+     * @param int $maxPerPage
+     * @return array of Invoice objects
+     */
     protected function callGetInvoices($page = 1, $maxPerPage = self::INVOICES_MAX_PER_PAGE)
     {
         return $this->getApi()->get(self::ROUTE_INVOICES, [
