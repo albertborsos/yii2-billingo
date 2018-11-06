@@ -14,6 +14,9 @@ abstract class AbstractApi extends BaseObject
     const ROUTE_INVOICES = self::ROUTE_BASE . 'invoices';
     const ROUTE_CLIENTS  = self::ROUTE_BASE . 'clients';
     const ROUTE_PAYMENT_METHODS = self::ROUTE_BASE . 'payment_methods';
+    const ROUTE_BANK_ACCOUNTS = self::ROUTE_BASE . 'bank_accounts';
+    const ROUTE_CURRENCY = self::ROUTE_BASE . 'currency';
+    const ROUTE_VAT = self::ROUTE_BASE . 'vat';
 
     const MAX_PER_PAGE = 50;
     const DEFAULT_PAGE = 1;
@@ -112,11 +115,11 @@ abstract class AbstractApi extends BaseObject
     }
 
     /**
-     * @param FormObject|Model $form
+     * @param AbstractApiDataForm $form
      * @return mixed|\Psr\Http\Message\ResponseInterface
      */
-    public function save(FormObject $form)
+    public function save(AbstractApiDataForm $form)
     {
-        return $this->getApi()->post($this->getRoute(), $form->attributes);
+        return $this->getApi()->post($this->getRoute(), $form->getData());
     }
 }

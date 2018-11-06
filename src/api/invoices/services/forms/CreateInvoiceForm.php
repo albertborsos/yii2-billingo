@@ -2,10 +2,10 @@
 
 namespace albertborsos\billingo\api\invoices\services\forms;
 
-use albertborsos\ddd\interfaces\FormObject;
-use yii\base\Model;
+use albertborsos\billingo\api\AbstractApiDataForm;
+use albertborsos\billingo\api\invoices\InvoicesApi;
 
-class CreateInvoiceForm extends Model implements FormObject
+class CreateInvoiceForm extends AbstractApiDataForm
 {
     public $fulfillment_date;
     public $due_date;
@@ -22,4 +22,12 @@ class CreateInvoiceForm extends Model implements FormObject
     public $bank_account_uid;
 
     public $items = [];
+
+    public function rules()
+    {
+        return [
+            [['items'], 'required'],
+            [['type'], 'in', 'range' => InvoicesApi::INVOICE_TYPES],
+        ];
+    }
 }
