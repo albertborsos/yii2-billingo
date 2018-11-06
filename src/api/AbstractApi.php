@@ -2,8 +2,10 @@
 
 namespace albertborsos\billingo\api;
 
+use albertborsos\ddd\interfaces\FormObject;
 use Billingo\API\Connector\Contracts\Request;
 use yii\base\BaseObject;
+use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
 abstract class AbstractApi extends BaseObject
@@ -106,5 +108,14 @@ abstract class AbstractApi extends BaseObject
     protected function setApi(Request $request)
     {
         $this->api = $request;
+    }
+
+    /**
+     * @param FormObject|Model $form
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function save(FormObject $form)
+    {
+        return $this->getApi()->post($this->getRoute(), $form->attributes);
     }
 }
