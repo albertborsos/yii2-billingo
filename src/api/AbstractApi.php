@@ -13,6 +13,7 @@ abstract class AbstractApi extends BaseObject
     const ROUTE_BASE = '/api/';
     const ROUTE_INVOICES = self::ROUTE_BASE . 'invoices';
     const ROUTE_CLIENTS  = self::ROUTE_BASE . 'clients';
+    const ROUTE_PAYMENT_METHODS = self::ROUTE_BASE . 'payment_methods';
 
     const MAX_PER_PAGE = 50;
     const DEFAULT_PAGE = 1;
@@ -34,7 +35,7 @@ abstract class AbstractApi extends BaseObject
     }
 
     /**
-     * @return Request
+     * @return \Billingo\API\Connector\HTTP\Request
      */
     protected function getApi()
     {
