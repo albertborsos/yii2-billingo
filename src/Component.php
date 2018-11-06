@@ -2,6 +2,7 @@
 
 namespace albertborsos\billingo;
 
+use albertborsos\billingo\api\clients\ClientsApi;
 use albertborsos\billingo\api\invoices\InvoicesApi;
 use Billingo\API\Connector\HTTP\Request;
 use yii\base\InvalidConfigException;
@@ -21,7 +22,12 @@ class Component extends \yii\base\Component
     /**
      * @var InvoicesApi
      */
-    private $invoices;
+    private $_invoices;
+
+    /**
+     * @var ClientsApi
+     */
+    private $_clients;
 
     /**
      * @throws InvalidConfigException
@@ -37,7 +43,15 @@ class Component extends \yii\base\Component
      */
     public function invoices()
     {
-        return $this->invoices;
+        return $this->_invoices;
+    }
+
+    /**
+     * @return ClientsApi
+     */
+    public function clients()
+    {
+        return $this->_clients;
     }
 
     /**
@@ -57,6 +71,7 @@ class Component extends \yii\base\Component
             'private_key' => $this->privateKey,
         ]);
 
-        $this->invoices = new InvoicesApi($api);
+        $this->_invoices = new InvoicesApi($api);
+        $this->_clients = new ClientsApi($api);
     }
 }

@@ -10,6 +10,7 @@ abstract class AbstractApi extends BaseObject
 {
     const ROUTE_BASE = '/api/';
     const ROUTE_INVOICES = self::ROUTE_BASE . 'invoices';
+    const ROUTE_CLIENTS  = self::ROUTE_BASE . 'clients';
 
     const MAX_PER_PAGE = 50;
     const DEFAULT_PAGE = 1;
@@ -92,7 +93,9 @@ abstract class AbstractApi extends BaseObject
 
     public function getById($id)
     {
-        return $this->getApi()->get($this->getRoute() . '/' . $id);
+        $result = $this->getApi()->get($this->getRoute() . '/' . $id);
+
+        return array_shift($result);
     }
 
     abstract protected function getRoute();
