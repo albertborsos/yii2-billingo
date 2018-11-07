@@ -39,6 +39,11 @@ class Component extends \yii\base\Component
     public $defaultLanguageCode = 'hu';
 
     /**
+     * @var Request
+     */
+    private $_api;
+
+    /**
      * @var InvoicesApi
      */
     private $_invoices;
@@ -145,11 +150,28 @@ class Component extends \yii\base\Component
             'private_key' => $this->privateKey,
         ]);
 
-        $this->_invoices = new InvoicesApi($api);
+        $this->setApi($api);
+        $this->_invoices = new InvoicesApi($this->getApi());
         $this->_clients = new ClientsApi($api);
-        $this->_paymentMethods = new PaymentMethodsApi($api, ['langCode' => $this->defaultLanguageCode]);
-        $this->_bankAccounts = new BankAccountsApi($api);
-        $this->_currency = new CurrencyApi($api);
-        $this->_vat = new VatApi($api);
+        $this->_paymentMethods = new PaymentMethodsApi($this->getApi(), ['langCode' => $this->defaultLanguageCode]);
+        $this->_bankAccounts = new BankAccountsApi($this->getApi());
+        $this->_currency = new CurrencyApi($this->getApi());
+        $this->_vat = new VatApi($this->getApi());
+    }
+
+    /**
+     * @param Request $api
+     */
+    private function setApi(Request $api)
+    {
+        $this->_api = $api;
+    }
+
+    /**
+     * @return Request
+     */
+    public function getApi()
+    {
+        return $this->_api;
     }
 }
