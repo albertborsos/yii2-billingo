@@ -3,7 +3,6 @@
 namespace albertborsos\billingo\api\invoices\services\forms;
 
 use albertborsos\billingo\api\AbstractApiDataForm;
-use albertborsos\billingo\api\invoices\InvoicesApi;
 
 class CreateInvoiceForm extends AbstractApiDataForm
 {
@@ -22,12 +21,4 @@ class CreateInvoiceForm extends AbstractApiDataForm
     public $bank_account_uid;
 
     public $items = [];
-
-    public function rules()
-    {
-        return [
-            [['items'], 'required'],
-            [['type'], 'in', 'range' => InvoicesApi::INVOICE_TYPES],
-        ];
-    }
 }

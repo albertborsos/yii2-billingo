@@ -16,7 +16,7 @@ class CurrencyApi extends AbstractApi
      * @param $fromCurrency
      * @param $toCurrency
      * @param $value
-     * @return integer|false
+     * @return integer|array
      */
     public function convert($fromCurrency, $toCurrency, $value)
     {
@@ -26,6 +26,10 @@ class CurrencyApi extends AbstractApi
             'value' => $value,
         ]);
 
-        return ArrayHelper::getValue($result, 'value', false);
+        if ($result['success']) {
+            return ArrayHelper::getValue($result, 'data.value', false);
+        }
+
+        return ArrayHelper::getValue($result, 'errors', []);
     }
 }

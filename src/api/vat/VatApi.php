@@ -20,7 +20,7 @@ class VatApi extends AbstractApi
             'v' => self::DEFAULT_TAX_VALUE,
         ]);
 
-        return ArrayHelper::getValue($result, '0.id');
+        return ArrayHelper::getValue($result, 'data.0.id');
     }
 
     public function getAll()
@@ -38,7 +38,7 @@ class VatApi extends AbstractApi
 
         return array_filter($models, function ($item) use ($attributes) {
             foreach ($attributes as $attribute => $value) {
-                if ($value == ArrayHelper::getValue($item, 'attributes.' . $attribute)) {
+                if ($value == ArrayHelper::getValue($item, 'data.attributes.' . $attribute)) {
                     return true;
                 }
             }

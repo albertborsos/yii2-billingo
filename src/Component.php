@@ -3,12 +3,13 @@
 namespace albertborsos\billingo;
 
 use albertborsos\billingo\api\bankAccounts\BankAccountsApi;
+use albertborsos\billingo\api\BillingoClient;
 use albertborsos\billingo\api\clients\ClientsApi;
 use albertborsos\billingo\api\currency\CurrencyApi;
 use albertborsos\billingo\api\invoices\InvoicesApi;
 use albertborsos\billingo\api\paymentMethods\PaymentMethodsApi;
 use albertborsos\billingo\api\vat\VatApi;
-use Billingo\API\Connector\HTTP\Request;
+use Billingo\API\Connector\Contracts\Request;
 use yii\base\InvalidConfigException;
 
 class Component extends \yii\base\Component
@@ -145,7 +146,7 @@ class Component extends \yii\base\Component
             throw new InvalidConfigException('Missing billingo private key');
         }
 
-        $api = new Request([
+        $api = new BillingoClient([
             'public_key' => $this->publicKey,
             'private_key' => $this->privateKey,
         ]);
