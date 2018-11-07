@@ -2,24 +2,11 @@
 
 namespace albertborsos\billingo\api\clients\services\forms;
 
+use albertborsos\billingo\api\UpdateFormTrait;
+
 class UpdateClientForm extends CreateClientForm
 {
+    use UpdateFormTrait;
+
     public $force = false;
-
-    public $id;
-
-    public function rules()
-    {
-        return [
-            [['id'], 'required'],
-        ];
-    }
-
-    public function getData()
-    {
-        $data = parent::getData();
-        unset($data['id']);
-
-        return $data;
-    }
 }
