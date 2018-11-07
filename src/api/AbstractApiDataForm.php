@@ -5,7 +5,7 @@ namespace albertborsos\billingo\api;
 use albertborsos\ddd\interfaces\FormObject;
 use yii\base\Model;
 
-class AbstractApiDataForm extends Model implements FormObject
+abstract class AbstractApiDataForm extends Model implements FormObject
 {
     /**
      * Returns attributes with not `null` values
