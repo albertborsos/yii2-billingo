@@ -6,8 +6,8 @@ use albertborsos\billingo\api\AbstractApi;
 
 class ClientsApi extends AbstractApi
 {
-    protected function getRoute()
+    protected function getRoute($id = null)
     {
-        return self::ROUTE_CLIENTS;
+        return rtrim(implode('/', [self::ROUTE_CLIENTS, $id]), '/');
     }
 }

@@ -7,7 +7,7 @@ use yii\helpers\ArrayHelper;
 
 class CurrencyApi extends AbstractApi
 {
-    protected function getRoute()
+    protected function getRoute($id = null)
     {
         return self::ROUTE_CURRENCY;
     }

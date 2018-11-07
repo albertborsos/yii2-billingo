@@ -102,7 +102,7 @@ abstract class AbstractApi extends BaseObject
         return array_shift($result);
     }
 
-    abstract protected function getRoute();
+    abstract protected function getRoute($id = null);
 
     /**
      * @param Request $request
@@ -118,6 +118,9 @@ abstract class AbstractApi extends BaseObject
      */
     public function save(AbstractApiDataForm $form)
     {
+        if ($form->hasProperty('id')) {
+            return $this->getApi()->put($this->getRoute($form->id), $form->getData());
+        }
         return $this->getApi()->post($this->getRoute(), $form->getData());
     }
 }

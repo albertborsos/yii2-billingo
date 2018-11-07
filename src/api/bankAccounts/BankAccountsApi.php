@@ -6,8 +6,8 @@ use albertborsos\billingo\api\AbstractApi;
 
 class BankAccountsApi extends AbstractApi
 {
-    protected function getRoute()
+    protected function getRoute($id = null)
     {
-        return self::ROUTE_BANK_ACCOUNTS;
+        return rtrim(implode('/', [self::ROUTE_BANK_ACCOUNTS, $id]), '/');
     }
 }

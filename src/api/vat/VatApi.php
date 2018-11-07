@@ -9,7 +9,7 @@ class VatApi extends AbstractApi
 {
     const DEFAULT_TAX_VALUE = '0.27';
 
-    protected function getRoute()
+    protected function getRoute($id = null)
     {
         return self::ROUTE_VAT;
     }

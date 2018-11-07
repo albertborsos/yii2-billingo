@@ -16,7 +16,7 @@ class AbstractApiDataForm extends Model implements FormObject
     {
         $data = [];
         foreach ($this->attributes as $attribute => $value) {
-            if ($value === null) {
+            if ($value === null || (is_array($value) && empty($value))) {
                 continue;
             }
             $data[$attribute] = $value;
