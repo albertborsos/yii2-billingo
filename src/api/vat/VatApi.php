@@ -28,9 +28,16 @@ class VatApi extends AbstractApi
         return parent::get();
     }
 
+    public function getById($id)
+    {
+        $result = $this->getAllByAttributes(['id' => $id]);
+
+        return array_shift($result);
+    }
+
     public function getAllByAttributes(array $attributes)
     {
-        $models = parent::get();
+        $models = ArrayHelper::getValue(parent::get(), 'data', []);
 
         if (empty($attributes)) {
             return $models;
@@ -38,7 +45,7 @@ class VatApi extends AbstractApi
 
         return array_filter($models, function ($item) use ($attributes) {
             foreach ($attributes as $attribute => $value) {
-                if ($value == ArrayHelper::getValue($item, 'data.attributes.' . $attribute)) {
+                if ($value == ArrayHelper::getValue($item, 'attributes.' . $attribute)) {
                     return true;
                 }
             }
