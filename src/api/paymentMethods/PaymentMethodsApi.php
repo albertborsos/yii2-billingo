@@ -19,9 +19,16 @@ class PaymentMethodsApi extends AbstractApi
         return parent::get();
     }
 
+    public function getById($id)
+    {
+        $result = $this->getAllByAttributes(['id' => $id]);
+
+        return array_shift($result);
+    }
+
     public function getAllByAttributes(array $attributes)
     {
-        $models = parent::get();
+        $models = ArrayHelper::getValue(parent::get(), 'data', []);
 
         if (empty($attributes)) {
             return $models;
