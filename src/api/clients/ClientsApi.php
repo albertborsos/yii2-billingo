@@ -10,4 +10,13 @@ class ClientsApi extends AbstractApi
     {
         return rtrim(implode('/', [self::ROUTE_CLIENTS, $id]), '/');
     }
+
+    /**
+     * @param $id
+     * @return bool
+     */
+    public function delete($id)
+    {
+        return $this->getApi()->delete($this->getRoute($id));
+    }
 }
