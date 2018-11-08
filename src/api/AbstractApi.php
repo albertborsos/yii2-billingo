@@ -15,6 +15,8 @@ abstract class AbstractApi extends BaseObject
     const ROUTE_BANK_ACCOUNTS = self::ROUTE_BASE . 'bank_accounts';
     const ROUTE_CURRENCY = self::ROUTE_BASE . 'currency';
     const ROUTE_VAT = self::ROUTE_BASE . 'vat';
+    const ROUTE_PRODUCTS = self::ROUTE_BASE . 'products';
+    const ROUTE_EXPENSES = self::ROUTE_BASE . 'expenses';
 
     const MAX_PER_PAGE = 50;
     const DEFAULT_PAGE = 1;
@@ -105,6 +107,16 @@ abstract class AbstractApi extends BaseObject
 
     abstract protected function getRoute($id = null);
 
+    /**
+     * Renders route from params array
+     *
+     * @param array $params
+     * @return string
+     */
+    protected function renderRoute(array $params)
+    {
+        return rtrim(implode('/', $params), '/');
+    }
     /**
      * @param Request $request
      */

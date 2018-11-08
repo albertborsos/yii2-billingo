@@ -8,6 +8,7 @@ use albertborsos\billingo\api\clients\ClientsApi;
 use albertborsos\billingo\api\currency\CurrencyApi;
 use albertborsos\billingo\api\invoices\InvoicesApi;
 use albertborsos\billingo\api\paymentMethods\PaymentMethodsApi;
+use albertborsos\billingo\api\products\ProductsApi;
 use albertborsos\billingo\api\vat\VatApi;
 use Billingo\API\Connector\Contracts\Request;
 use yii\base\InvalidConfigException;
@@ -55,6 +56,11 @@ class Component extends \yii\base\Component
     private $_clients;
 
     /**
+     * @var ProductsApi
+     */
+    private $_products;
+
+    /**
      * @var PaymentMethodsApi
      */
     private $_paymentMethods;
@@ -100,6 +106,14 @@ class Component extends \yii\base\Component
     public function clients()
     {
         return $this->_clients;
+    }
+
+    /**
+     * @return ProductsApi
+     */
+    public function products()
+    {
+        return $this->_products;
     }
 
     /**
@@ -154,6 +168,7 @@ class Component extends \yii\base\Component
         $this->setApi($api);
         $this->_invoices = new InvoicesApi($this->getApi());
         $this->_clients = new ClientsApi($api);
+        $this->_products = new ProductsApi($api);
         $this->_paymentMethods = new PaymentMethodsApi($this->getApi(), ['langCode' => $this->defaultLanguageCode]);
         $this->_bankAccounts = new BankAccountsApi($this->getApi());
         $this->_currency = new CurrencyApi($this->getApi());
