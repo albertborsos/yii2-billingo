@@ -28,6 +28,16 @@ class InvoicesApi extends AbstractApi
         }
     }
 
+    public function generate($id)
+    {
+        $response = $this->getApi()->get($this->getRoute($id) . '/generate');
+
+        if ($response['success']) {
+            return true;
+        }
+        return false;
+    }
+
     protected function getRoute($id = null)
     {
         return rtrim(implode('/', [self::ROUTE_INVOICES, $id]), '/');
