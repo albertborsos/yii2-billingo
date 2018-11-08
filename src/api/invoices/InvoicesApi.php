@@ -3,6 +3,7 @@
 namespace albertborsos\billingo\api\invoices;
 
 use albertborsos\billingo\api\AbstractApi;
+use yii\helpers\ArrayHelper;
 
 class InvoicesApi extends AbstractApi
 {
@@ -17,6 +18,15 @@ class InvoicesApi extends AbstractApi
 //        self::INVOICE_TYPE_NOT_USED_RESERVED,
         self::INVOICE_TYPE_NORMAL,
     ];
+
+    public function downloadLink($id)
+    {
+        $response = $this->getApi()->get($this->getRoute($id) . '/code');
+
+        if ($response['success']) {
+            return 'https://www.billingo.hu/access/c:' . ArrayHelper::getValue($response, 'data.code');
+        }
+    }
 
     protected function getRoute($id = null)
     {
