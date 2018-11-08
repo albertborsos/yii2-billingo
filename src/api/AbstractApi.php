@@ -87,7 +87,7 @@ abstract class AbstractApi extends BaseObject
 
         return array_filter($models, function ($item) use ($attributes) {
             foreach ($attributes as $attribute => $value) {
-                if ($value == ArrayHelper::getValue($item, 'data.attributes.' . $attribute)) {
+                if ($value == ArrayHelper::getValue($item, 'attributes.' . $attribute)) {
                     return true;
                 }
             }
