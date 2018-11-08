@@ -73,7 +73,8 @@ abstract class AbstractApi extends BaseObject
         $page = self::DEFAULT_PAGE;
         $models = [];
         do {
-            $response = $this->get($page);
+            $response = ArrayHelper::getValue($this->get($page), 'data');
+
             if (is_array($response)) {
                 $models = ArrayHelper::merge($models, $response);
             }
