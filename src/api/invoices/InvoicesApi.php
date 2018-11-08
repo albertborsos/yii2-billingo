@@ -19,6 +19,10 @@ class InvoicesApi extends AbstractApi
         self::INVOICE_TYPE_NORMAL,
     ];
 
+    /**
+     * @param $id
+     * @return string
+     */
     public function downloadLink($id)
     {
         $response = $this->getApi()->get($this->getRoute($id) . '/code');
@@ -28,6 +32,10 @@ class InvoicesApi extends AbstractApi
         }
     }
 
+    /**
+     * @param $id
+     * @return bool
+     */
     public function generate($id)
     {
         $response = $this->getApi()->get($this->getRoute($id) . '/generate');
@@ -36,6 +44,71 @@ class InvoicesApi extends AbstractApi
             return true;
         }
         return false;
+    }
+
+    /**
+     * @param $id
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function download($id)
+    {
+        return $this->getApi()->get($this->getRoute($id) . '/download');
+    }
+
+    /**
+     * @param $id
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function cancel($id)
+    {
+        return $this->getApi()->get($this->getRoute($id) . '/cancel');
+    }
+
+    /**
+     * @param $id
+     * @return bool
+     */
+    public function send($id)
+    {
+        $response = $this->getApi()->get($this->getRoute($id) . '/send');
+
+        if ($response['success']) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @param $id
+     * @param $date
+     * @param $amount
+     * @param $paymentMethod
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function pay($id, $date, $amount, $paymentMethod)
+    {
+        return $this->getApi()->post($this->getRoute($id) . '/pay', [
+            'date' => $date,
+            'amount' => $amount,
+            'payment_method' => $paymentMethod,
+        ]);
+    }
+
+    /**
+     * @param $id
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function undoPayment($id)
+    {
+        return $this->getApi()->delete($this->getRoute($id) . '/pay');
+    }
+
+    /**
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function blocks()
+    {
+        return $this->getApi()->get($this->getRoute() . '/blocks');
     }
 
     protected function getRoute($id = null)
