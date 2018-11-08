@@ -113,7 +113,7 @@ class InvoicesApi extends AbstractApi
 
     protected function getRoute($id = null)
     {
-        return rtrim(implode('/', [self::ROUTE_INVOICES, $id]), '/');
+        return $this->renderRoute([self::ROUTE_INVOICES, $id]);
     }
 
     public function types()

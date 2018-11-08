@@ -11,7 +11,7 @@ class PaymentMethodsApi extends AbstractApi
 
     protected function getRoute($id = null)
     {
-        return self::ROUTE_PAYMENT_METHODS . '/' . $this->langCode;
+        return $this->renderRoute([self::ROUTE_PAYMENT_METHODS, $this->langCode]);
     }
 
     public function getAll()

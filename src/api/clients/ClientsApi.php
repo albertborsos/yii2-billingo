@@ -8,7 +8,7 @@ class ClientsApi extends AbstractApi
 {
     protected function getRoute($id = null)
     {
-        return rtrim(implode('/', [self::ROUTE_CLIENTS, $id]), '/');
+        return $this->renderRoute([self::ROUTE_CLIENTS, $id]);
     }
 
     /**

@@ -8,6 +8,6 @@ class BankAccountsApi extends AbstractApi
 {
     protected function getRoute($id = null)
     {
-        return rtrim(implode('/', [self::ROUTE_BANK_ACCOUNTS, $id]), '/');
+        return $this->renderRoute([self::ROUTE_BANK_ACCOUNTS, $id]);
     }
 }
