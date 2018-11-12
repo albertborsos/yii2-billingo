@@ -81,7 +81,7 @@ abstract class AbstractApi extends BaseObject
                 $models = ArrayHelper::merge($models, $response);
             }
             $page++;
-        } while ($response !== null);
+        } while ($response !== null || $page > 1000);
 
         if (empty($attributes)) {
             return $models;
