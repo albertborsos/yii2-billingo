@@ -13,7 +13,7 @@
     "require": {
         "yiisoft/yii2": "~2.0.0",
         "voov/billingo-api-connector": "~1.0.7",
-        "albertborsos/yii2-ddd": "^0.3.2"
+        "albertborsos/yii2-ddd": "~0.3"
     },
     "require-dev": {
         "mito/yii2-coding-standards": "~2.0.0@beta"
